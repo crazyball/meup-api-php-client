@@ -1,1 +1,2 @@
-# meup-api-php-client
+1001Pharmacies API Php Client
+=============================
