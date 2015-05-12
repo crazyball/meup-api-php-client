@@ -1,0 +1,18 @@
+<phpunit
+        colors="true"
+        stderr="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnFailure="false">
+    <testsuites>
+        <testsuite name="1001 Pharmacies API PHP Client Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Meup</directory>
+        </whitelist>
+    </filter>
+</phpunit>
