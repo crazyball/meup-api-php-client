@@ -46,7 +46,7 @@ require_once 'vendor/autoload.php';
 $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
-$client = new \Meup\Api\Client\Client($publicKey, $secretKey);
+$client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey, $apiVersion);
 $order  = $client->api('order')->find('1234567890');
 ```
 
@@ -63,7 +63,7 @@ require_once 'vendor/autoload.php';
 $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
-$client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey);
+$client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey, $apiVersion);
 $client->setCache(
     // Built in one, or any cache implementing this interface:
     // Github\HttpClient\Cache\CacheInterface
