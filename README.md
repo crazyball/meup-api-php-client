@@ -66,7 +66,7 @@ $secretKey = '{my secret key}';
 $client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey, $apiVersion);
 $client->setCache(
     // Built in one, or any cache implementing this interface:
-    // Github\HttpClient\Cache\CacheInterface
+    // \Meup\Api\Client\HttpClient\Cache\CacheInterface
     new \Meup\Api\Client\HttpClient\Cache\FilesystemCache('/tmp/meup-api-php-client-cache')
 );
 
