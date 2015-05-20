@@ -191,5 +191,8 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
         $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
 
         $this->assertContains('order', $client->getApiList());
+        $this->assertContains('brand', $client->getApiList());
+        $this->assertContains('reason', $client->getApiList());
+        $this->assertContains('product', $client->getApiList());
     }
 }

@@ -7,6 +7,7 @@ use Meup\Api\Client\Exception\BadMethodCallException;
 use Meup\Api\Client\Exception\InvalidArgumentException;
 use Meup\Api\Client\HttpClient\HttpClient;
 use Meup\Api\Client\HttpClient\HttpClientInterface;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * Simple PHP Client for 1001Pharmacies Restfull API.
@@ -81,7 +82,15 @@ class MeupApiClient
             case Api::ORDERS:
                 $api = new Api\Order($this);
                 break;
-
+            case Api::BRANDS:
+                $api = new Api\Brand($this);
+                break;
+            case Api::REASONS:
+                $api = new Api\Reason($this);
+                break;
+            case Api::PRODUCTS:
+                $api = new Api\Product($this);
+                break;
             default:
                 throw new InvalidArgumentException(
                     sprintf(

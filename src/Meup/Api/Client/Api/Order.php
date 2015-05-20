@@ -3,7 +3,7 @@
 namespace Meup\Api\Client\Api;
 
 /**
- * Searching users, getting user information.
+ * Order API
  *
  * @link   http://developer.1001pharmacies.com/docs/v1/orders.html
  *

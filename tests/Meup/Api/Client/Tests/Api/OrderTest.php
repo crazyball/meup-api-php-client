@@ -3,7 +3,7 @@
 namespace Meup\Api\Client\Tests\Api;
 
 /**
- * Class UserTest
+ * Class OrderTest
  *
  * @author Loïc Ambrosini <loic@1001pharmacies.com>
  */
