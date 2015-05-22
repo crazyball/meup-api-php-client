@@ -20,6 +20,6 @@ class Reason extends AbstractApi
      */
     public function all()
     {
-        return $this->get('api/sav/reasons/');
+        return $this->get('api/sav/reasons');
     }
 }

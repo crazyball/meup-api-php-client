@@ -34,6 +34,6 @@ class Order extends AbstractApi
      */
     public function all()
     {
-        return $this->get('api/orders/');
+        return $this->get('api/orders');
     }
 }

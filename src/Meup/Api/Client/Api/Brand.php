@@ -20,7 +20,7 @@ class Brand extends AbstractApi
      */
     public function all()
     {
-        return $this->get('api/brands/');
+        return $this->get('api/brands');
     }
 
     /**
