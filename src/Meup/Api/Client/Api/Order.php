@@ -24,4 +24,16 @@ class Order extends AbstractApi
     {
         return $this->get('api/orders/'.rawurlencode($identifier));
     }
+
+    /**
+     * Get a list of orders awaiting preparation without details.
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/orders.html#tocAnchor-1-3-1
+     *
+     * @return null|array orders found
+     */
+    public function all()
+    {
+        return $this->get('api/orders/');
+    }
 }

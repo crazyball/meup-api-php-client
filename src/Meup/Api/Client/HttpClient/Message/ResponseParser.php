@@ -24,20 +24,59 @@ class ResponseParser
         return $content;
     }
 
+    public static function getPerPage(Response $response)
+    {
+        $body    = $response->getBody(true);
+        $content = json_decode($body, true);
+
+        if (empty($content) && !array_key_exists('limit', $content)) {
+            return null;
+        }
+
+        return $content['limit'];
+    }
+
+    public static function getCurrentPage(Response $response)
+    {
+        $body    = $response->getBody(true);
+        $content = json_decode($body, true);
+
+        if (empty($content) && !array_key_exists('page', $content)) {
+            return null;
+        }
+
+        return $content['page'];
+    }
+
+    public static function getMaxPages(Response $response)
+    {
+        $body    = $response->getBody(true);
+        $content = json_decode($body, true);
+
+        if (empty($content) && !array_key_exists('pages', $content)) {
+            return null;
+        }
+
+        return $content['pages'];
+    }
+
     public static function getPagination(Response $response)
     {
-        $header = $response->getHeader('Link');
+        $body    = $response->getBody(true);
+        $content = json_decode($body, true);
 
-        if (empty($header)) {
+        if (empty($content)) {
             return null;
         }
 
         $pagination = array();
-        foreach (explode(',', $header) as $link) {
-            preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
+        if (!array_key_exists('_links', $content)) {
+            return null;
+        }
 
-            if (3 === count($match)) {
-                $pagination[$match[2]] = $match[1];
+        foreach ($content['_links'] as $linkType => $link) {
+            if (in_array($linkType, array('self', 'first', 'last', 'next', 'previous'))) {
+                $pagination[$linkType] = $link['href'];
             }
         }
 

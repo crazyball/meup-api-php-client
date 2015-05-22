@@ -68,23 +68,16 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetchAll(ApiInterface $api, $method, array $parameters = array())
     {
-        // get the perPage from the api
-        $perPage = $api->getPerPage();
-
-        // set parameters per_page to 1001Pharmacies max to minimize number of requests
-        $api->setPerPage(100);
-
         $result = call_user_func_array(array($api, $method), $parameters);
         $this->postFetch();
 
+        $finalResult = $result['_embedded']['items'];
         while ($this->hasNext()) {
-            $result = array_merge($result, $this->fetchNext());
+            $nextResult = $this->fetchNext();
+            $finalResult = array_merge($finalResult, $nextResult['_embedded']['items']);
         }
 
-        // restore the perPage
-        $api->setPerPage($perPage);
-
-        return $result;
+        return $finalResult;
     }
 
     /**
@@ -92,7 +85,8 @@ class ResultPager implements ResultPagerInterface
      */
     public function postFetch()
     {
-        $this->pagination = ResponseParser::getPagination($this->client->getHttpClient()->getLastResponse());
+        $lastResponse = $this->client->getHttpClient()->getLastResponse();
+        $this->pagination = ResponseParser::getPagination($lastResponse);
     }
 
     /**
@@ -116,7 +110,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function hasPrevious()
     {
-        return $this->has('prev');
+        return $this->has('previous');
     }
 
     /**
@@ -124,7 +118,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetchPrevious()
     {
-        return $this->get('prev');
+        return $this->get('previous');
     }
 
     /**

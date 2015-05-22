@@ -177,7 +177,9 @@ class HttpClient implements HttpClientInterface
 
         try {
             $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
+            $this->lastRequest  = $request;
             $response = $this->client->send($request);
+            $this->lastResponse = $response;
         } catch (\LogicException $e) {
             throw new ErrorException($e->getMessage(), $e->getCode(), $e);
         } catch (CurlException $e) {
@@ -186,8 +188,6 @@ class HttpClient implements HttpClientInterface
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->lastRequest  = $request;
-        $this->lastResponse = $response;
 
         return $response;
     }
