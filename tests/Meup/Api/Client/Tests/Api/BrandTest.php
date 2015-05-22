@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Meup GeoLocation Bundle.
+ *
+ * (c) 1001pharmacies <https://github.com/1001Pharmacies/meup-api-php-client>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Meup\Api\Client\Tests\Api;
 
@@ -20,7 +28,7 @@ class BrandTest extends TestCase
         $api
             ->expects($this->once())
             ->method('get')
-            ->with('api/brands/')
+            ->with('api/brands')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all());
