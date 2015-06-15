@@ -65,7 +65,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetch(ApiInterface $api, $method, array $parameters = array())
     {
-        $result = call_user_func_array(array($api, $method), $parameters);
+        $result = call_user_func_array(array($api, $method), array($parameters));
         $this->postFetch();
 
         return $result;
@@ -76,7 +76,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetchAll(ApiInterface $api, $method, array $parameters = array())
     {
-        $result = call_user_func_array(array($api, $method), $parameters);
+        $result = call_user_func_array(array($api, $method), array($parameters));
         $this->postFetch();
 
         $finalResult = $result['_embedded']['items'];

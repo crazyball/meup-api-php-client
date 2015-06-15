@@ -77,11 +77,20 @@ try {
     // Lazy fetcher
     $ordersPage1 = $pager->fetch($orderApiClient, 'all');
     if (true === $pager->hasNext()) {
-     $ordersPage2 = $pager->fetchNext();
+        $ordersPage2 = $pager->fetchNext();
     }
 
-    // Eager fetcher
+    // Eager fetcher (Very slow !!! prefer lazy fetcher)
     $orders = $pager->fetchAll($orderApiClient, 'all');
+    
+    // Parameters
+    $orderApiClient->setPerPage('5');
+    $orders = $pager->fetch($orderApiClient, 'all');
+    
+    OR
+    
+    $orders = $pager->fetch($orderApiClient, 'all', array('perPage' => 5, 'page' => 2);
+    
 } catch (\Exception $e) {
     // error logging ?
 }

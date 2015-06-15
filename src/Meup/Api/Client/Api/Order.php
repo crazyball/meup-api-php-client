@@ -10,6 +10,8 @@
 
 namespace Meup\Api\Client\Api;
 
+use Meup\Api\Client\Utils\HttpRequestParametersBuilder;
+
 /**
  * Order API
  *
@@ -38,10 +40,12 @@ class Order extends AbstractApi
      *
      * @link http://developers.1001pharmacies.com/docs/v1/orders.html#tocAnchor-1-3-1
      *
-     * @return null|array orders found
+     * @param array $parameters
+     *
+     * @return array|null orders found
      */
-    public function all()
+    public function all($parameters = array())
     {
-        return $this->get('api/orders');
+        return $this->get('api/orders' . HttpRequestParametersBuilder::buildFromArray($parameters));
     }
 }
