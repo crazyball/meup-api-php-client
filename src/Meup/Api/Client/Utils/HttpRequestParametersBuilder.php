@@ -15,7 +15,7 @@ class HttpRequestParametersBuilder
     public static function buildFromArray($parameters = array())
     {
         $queryString = "";
-        if ($parameters) {
+        if ($parameters && is_array($parameters)) {
             $queryString .= "?";
             foreach ($parameters as $param => $value) {
                 $queryString .= $param . "=" . $value . "&";
