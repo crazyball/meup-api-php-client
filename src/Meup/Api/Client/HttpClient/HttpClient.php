@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Meup GeoLocation Bundle.
+ * This file is part of the PHP Client for 1001 Pharmacies API.
  *
  * (c) 1001pharmacies <https://github.com/1001Pharmacies/meup-api-php-client>
  *
@@ -35,7 +35,7 @@ class HttpClient implements HttpClientInterface
     protected $access_token;
 
     protected $options = array(
-        'base_url'    => 'https://api.1001pharmacies.com',
+        'base_url'    => 'http://local.api.1001pharmacies.com:8081',
 
         'user_agent'  => 'php-meup-api (http://github.com/1001pharmacies/meup-api-php-client)',
         'timeout'     => 10,
