@@ -10,28 +10,12 @@
         <echo>apidoc   Generates API reference</echo>
     </target>
 
-    <target name="tests" depends="phpcs,phpmd,phpcpd,phpunit"/>
+    <target name="tests" depends="phpcs,phpcpd,phpunit"></target>
 
     <target name="phpcs">
         <phpcodesniffer standard="PSR2">
             <fileset dir="./">
                 <include name="**/*.php" />
-                <exclude name="tests/" />
-                <exclude name="vendor/" />
-                <exclude name="build/" />
-                <exclude name="cache/" />
-                <exclude name="app/" />
-                <exclude name="bin/" />
-                <exclude name="web/" />
-            </fileset>
-        </phpcodesniffer>
-    </target>
-
-    <target name="phpmd">
-        <phpcodesniffer standard="PSR2">
-            <fileset dir="./">
-                <include name="**/*.php" />
-                <exclude name="tests/" />
                 <exclude name="vendor/" />
                 <exclude name="build/" />
                 <exclude name="cache/" />
@@ -44,13 +28,6 @@
 
     <target name="phpcpd">
         <exec executable="./bin/phpcpd">
-            <arg path="./" />
-            <arg value="--exclude=vendor" />
-        </exec>
-    </target>
-
-    <target name="phpcpd">
-        <exec executable="./bin/phpcmd">
             <arg path="./" />
             <arg value="--exclude=vendor" />
         </exec>

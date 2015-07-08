@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the PHP Client for 1001 Pharmacies API.
+ * This file is part of the Meup GeoLocation Bundle.
  *
  * (c) 1001pharmacies <https://github.com/1001Pharmacies/meup-api-php-client>
  *
@@ -9,7 +9,6 @@
  */
 
 namespace Meup\Api\Client\Tests\Api;
-use Meup\Api\Client\Api\Order;
 
 /**
  * Class OrderTest
@@ -25,7 +24,6 @@ class OrderTest extends TestCase
     {
         $expectedArray = array('complete_invoice_number' => '1234567890');
 
-        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -33,27 +31,6 @@ class OrderTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('1234567890'));
-    }
-
-    /**
-     * @test
-     */
-    public function generateParcelLabelTest()
-    {
-        $baseUri = 'http://www.1001pharmacies.com';
-
-        $expectedArray = array(
-            'uri' => $baseUri . '/etiquette/1234567890?token=115ff9df6a7904df8c5493649eeae4323fb0ead0&store=26'
-        );
-
-        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('api/orders/1234567890/parcellabel')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->parcellabel('1234567890'));
     }
 
     protected function getApiClass()
