@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Meup GeoLocation Bundle.
+ * This file is part of the PHP Client for 1001 Pharmacies API.
  *
  * (c) 1001pharmacies <https://github.com/1001Pharmacies/meup-api-php-client>
  *
