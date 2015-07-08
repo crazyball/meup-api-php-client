@@ -9,6 +9,7 @@
  */
 
 namespace Meup\Api\Client\Tests\Api;
+use Meup\Api\Client\Api\Order;
 
 /**
  * Class OrderTest
@@ -24,6 +25,7 @@ class OrderTest extends TestCase
     {
         $expectedArray = array('complete_invoice_number' => '1234567890');
 
+        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -38,8 +40,13 @@ class OrderTest extends TestCase
      */
     public function generateParcelLabelTest()
     {
-        $expectedArray = array('uri' => 'http://www.1001pharmacies.com/etiquette/1234567890?token=115ff9df6a7904df8c5493649eeae4323fb0ead0&store=26');
+        $baseUri = 'http://www.1001pharmacies.com';
 
+        $expectedArray = array(
+            'uri' => $baseUri . '/etiquette/1234567890?token=115ff9df6a7904df8c5493649eeae4323fb0ead0&store=26'
+        );
+
+        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
