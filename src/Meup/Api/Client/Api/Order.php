@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Meup GeoLocation Bundle.
+ * This file is part of the PHP Client for 1001 Pharmacies API.
  *
  * (c) 1001pharmacies <https://github.com/1001Pharmacies/meup-api-php-client>
  *
@@ -47,5 +47,33 @@ class Order extends AbstractApi
     public function all($parameters = array())
     {
         return $this->get('api/orders' . HttpRequestParametersBuilder::buildFromArray($parameters));
+    }
+
+    /**
+     * Generate parcel label for given order.
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/orders.html#tocAnchor-1-3-1
+     *
+     * @param string $identifier the order identifier
+     *
+     * @return array|null orders found
+     */
+    public function parcellabel($identifier)
+    {
+        return $this->get("api/orders/{$identifier}/parcellabel");
+    }
+
+    /**
+     * Expediate given order
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/orders.html#tocAnchor-1-3-1
+     *
+     * @param string $identifier the order identifier
+     *
+     * @return array|null orders found
+     */
+    public function expediate($identifier)
+    {
+        return $this->post("api/orders/{$identifier}/expediate");
     }
 }
