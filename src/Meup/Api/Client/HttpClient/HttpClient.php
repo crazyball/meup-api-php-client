@@ -117,7 +117,7 @@ class HttpClient implements HttpClientInterface
     public function clearHeaders()
     {
         $this->headers = array(
-            'Accept' => sprintf('application/vnd.1001pharmacies.api+json;version=%s', $this->options['api_version']),
+            'Accept' => sprintf('application/json;version=%s', $this->options['api_version']),
             'User-Agent' => sprintf('%s', $this->options['user_agent'])
         );
     }

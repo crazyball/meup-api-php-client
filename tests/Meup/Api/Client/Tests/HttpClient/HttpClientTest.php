@@ -191,29 +191,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Guzzle\Http\Message\MessageInterface', $response);
     }
 
-    /**
-     * @test
-     * @expectedException \Meup\Api\Client\Exception\ApiLimitExceedException
-     */
-    public function shouldThrowExceptionWhenApiLimitExceed()
-    {
-        $path       = '/some/path';
-        $parameters = array('a = b');
-        $headers    = array('c' => 'd');
-
-        $response = new Response(403);
-        $response->addHeader('X-RateLimit-Remaining', 0);
-
-        $mockPlugin = new MockPlugin();
-        $mockPlugin->addResponse($response);
-
-        $client = new GuzzleClient('https://api.1001pharmacies.com/');
-        $client->addSubscriber($mockPlugin);
-
-        $httpClient = new TestHttpClient('1_meuptech', 'meuptech', array(), $client);
-        $httpClient->get($path, $parameters, $headers);
-    }
-
     protected function getBrowserMock(array $methods = array())
     {
         $mock = $this->getMock(
