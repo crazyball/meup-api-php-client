@@ -74,6 +74,12 @@ class Order extends AbstractApi
      */
     public function expediate($identifier)
     {
-        return $this->post("api/orders/{$identifier}/expediate");
+        return $this->post(
+            "api/orders/{$identifier}/expediate",
+            array(),
+            array(
+                'Content-Type' => 'application/json'
+            )
+        );
     }
 }
