@@ -9,15 +9,11 @@
         processIsolation            = "false"
         stopOnFailure               = "false"
         syntaxCheck                 = "false"
-        bootstrap                   = "tests/bootstrap.php"
+        bootstrap                   = "Tests/bootstrap.php"
     >
     <testsuites>
-        <testsuite name="Code">
-            <directory>./tests</directory>
-            <exclude>./tests/Meup/Api/Client/Tests/Functional</exclude>
-        </testsuite>
-        <testsuite name="Functional">
-            <directory>./tests/Meup/Api/Client/Tests/Functional</directory>
+        <testsuite name="">
+            <directory>./Tests</directory>
         </testsuite>
     </testsuites>
     <filter>
