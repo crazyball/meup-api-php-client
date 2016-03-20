@@ -14,7 +14,6 @@ use Guzzle\Common\Event;
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Meup\Api\Client\Exception\AuthenticationException;
-use Meup\Api\Client\MeupApiClient;
 use Meup\Api\Client\Exception\RuntimeException;
 
 /**

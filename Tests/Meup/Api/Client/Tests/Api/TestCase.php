@@ -37,7 +37,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             array(array(), $httpClient)
         )
         ;
-        $client = new MeupApiClient("clientId", "clientSecret", "latest", $mock);
+        $client = new MeupApiClient("clientId", "clientSecret", $mock);
 
         return $this->getMockBuilder($this->getApiClass())
             ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put'))
