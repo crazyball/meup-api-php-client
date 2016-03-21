@@ -11,6 +11,9 @@
         syntaxCheck                 = "false"
         bootstrap                   = "Tests/bootstrap.php"
     >
+    <php>
+        <ini name="error_reporting" value="-1" />
+    </php>
     <testsuites>
         <testsuite name="">
             <directory>./Tests</directory>
