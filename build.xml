@@ -10,7 +10,7 @@
         <echo>apidoc   Generates API reference</echo>
     </target>
 
-    <target name="tests" depends="phpcs,phpmd,phpcpd,phpunit"/>
+    <target name="test" depends="phpcs,phpmd,phpcpd,phpunit"/>
 
     <target name="phpcs">
         <phpcodesniffer standard="PSR2">
