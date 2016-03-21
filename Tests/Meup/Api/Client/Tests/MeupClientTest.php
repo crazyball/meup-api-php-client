@@ -33,7 +33,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotHaveToInjectHttpClientToConstructor()
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret);
 
         $this->assertInstanceOf('Meup\Api\Client\HttpClient\HttpClient', $client->getHttpClient());
     }
@@ -57,17 +57,6 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpClientMock(array('addListener'));
 
         new MeupApiClient(null, null, $httpClient);
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldThrowExceptionWhenInvalidApiVersion()
-    {
-        $httpClient = $this->getHttpClientMock(array('addListener'));
-
-        new MeupApiClient($this->clientId, $this->clientSecret, 'badVersion', $httpClient);
     }
 
     /**
@@ -116,7 +105,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldGetApiInstance($apiName, $class)
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret);
 
         $this->assertInstanceOf($class, $client->api($apiName));
     }
@@ -130,7 +119,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldGetMagicApiInstance($apiName, $class)
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret);
 
         $this->assertInstanceOf($class, $client->$apiName());
     }
@@ -141,7 +130,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotGetApiInstance()
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret);
         $client->api('api_manager_not_found');
     }
 
@@ -151,7 +140,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotGetMagicApiInstance()
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret);
 
         $notFoundApi = 'doNotExistApiManager';
         $client->{$notFoundApi}();
