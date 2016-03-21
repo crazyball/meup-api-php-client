@@ -2,7 +2,7 @@
 
 A simple Object Oriented wrapper for 1001 pharmacies Restfull API, written with PHP5.
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/10f8f54e-f6ba-4483-b93d-fc2c9e52dfbc/mini.png)](https://insight.sensiolabs.com/projects/10f8f54e-f6ba-4483-b93d-fc2c9e52dfbc)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b/mini.png)](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b)
 
 Uses [1001 Pharmacies API v1.0](https://api.1001pharmacies.com/).
 
