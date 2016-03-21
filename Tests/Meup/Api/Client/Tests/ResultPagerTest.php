@@ -225,7 +225,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             $httpClient = $this->getHttpClientMock();
         }
 
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
         $client->setHttpClient($httpClient);
 
         return $client;

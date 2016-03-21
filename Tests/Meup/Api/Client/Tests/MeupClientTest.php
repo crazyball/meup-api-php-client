@@ -43,7 +43,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldInjectHttpClientInterfaceToConstructor()
     {
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $this->getHttpClientMock());
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->getHttpClientMock());
 
         $this->assertInstanceOf('Meup\Api\Client\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
@@ -56,7 +56,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
     {
         $httpClient = $this->getHttpClientMock(array('addListener'));
 
-        new MeupApiClient(null, null, $this->version, $httpClient);
+        new MeupApiClient(null, null, $httpClient);
     }
 
     /**
@@ -78,7 +78,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpClientMock(array('clearHeaders'));
         $httpClient->expects($this->once())->method('clearHeaders');
 
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
         $client->clearHeaders();
     }
 
@@ -92,7 +92,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())->method('setHeaders')->with($headers);
 
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
         $client->setHeaders($headers);
     }
 
@@ -103,7 +103,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
     {
         $httpClient = $this->getHttpClientMock();
 
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
         $client->setHttpClient($httpClient);
     }
 
@@ -185,7 +185,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
     public function shouldGetApiVersionList()
     {
         $httpClient = $this->getHttpClientMock();
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
 
         $this->assertContains('latest', $client->getSupportedApiVersions());
     }
@@ -196,7 +196,7 @@ class MeupClientTest extends \PHPUnit_Framework_TestCase
     public function shouldGetApiList()
     {
         $httpClient = $this->getHttpClientMock();
-        $client = new MeupApiClient($this->clientId, $this->clientSecret, $this->version, $httpClient);
+        $client = new MeupApiClient($this->clientId, $this->clientSecret, $httpClient);
 
         $this->assertContains('order', $client->getApiList());
         $this->assertContains('brand', $client->getApiList());
