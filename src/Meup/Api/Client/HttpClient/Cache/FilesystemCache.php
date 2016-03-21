@@ -37,7 +37,7 @@ class FilesystemCache implements CacheInterface
      */
     public function get($id)
     {
-        if (false !== $content = @file_get_contents($this->getPath($id))) {
+        if (false !== $content = file_get_contents($this->getPath($id))) {
             return unserialize($content);
         }
 

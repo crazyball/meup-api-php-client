@@ -223,7 +223,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      */
     protected function getClientMock()
     {
-        return new MeupApiClient("clientId", "clientSecret", 'latest', $this->getHttpMock());
+        return new MeupApiClient("clientId", "clientSecret", $this->getHttpMock());
     }
 
     /**

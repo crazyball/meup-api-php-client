@@ -15,7 +15,6 @@ use Meup\Api\Client\Exception\BadMethodCallException;
 use Meup\Api\Client\Exception\InvalidArgumentException;
 use Meup\Api\Client\HttpClient\HttpClient;
 use Meup\Api\Client\HttpClient\HttpClientInterface;
-use Symfony\Component\Yaml\Parser;
 
 /**
  * Simple PHP Client for 1001Pharmacies Restfull API.
@@ -35,11 +34,6 @@ class MeupApiClient
     private $client_secret;
 
     /**
-     * @var string
-     */
-    private $version;
-
-    /**
      * The HttpClient used to communicate with 1001Pharmacies Api.
      *
      * @var HttpClient
@@ -51,7 +45,6 @@ class MeupApiClient
      *
      * @param string                   $clientId        Client identifier
      * @param string                   $clientSecret    Client secret key
-     * @param string                   $version         Api version to use
      * @param null|HttpClientInterface $httpClient      1001pharmacies http client
      *
      * @throws InvalidArgumentException If no credentials or wrong version were given
@@ -59,7 +52,6 @@ class MeupApiClient
     public function __construct(
         $clientId,
         $clientSecret,
-        $version = ApiVersions::LATEST,
         HttpClientInterface $httpClient = null
     ) {
 
@@ -67,13 +59,8 @@ class MeupApiClient
             throw new InvalidArgumentException('You need to specify yours credentials!');
         }
 
-        if (!in_array($version, ApiVersions::all())) {
-            throw new InvalidArgumentException('You need to specify a valid Api version!');
-        }
-
         $this->client_id        = $clientId;
         $this->client_secret    = $clientSecret;
-        $this->version          = $version;
         $this->httpClient       = $httpClient;
     }
 
