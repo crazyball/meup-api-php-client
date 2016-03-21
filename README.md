@@ -3,6 +3,7 @@
 A simple Object Oriented wrapper for 1001 pharmacies Restfull API, written with PHP5.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b/mini.png)](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b)
+[![Build Status](https://travis-ci.org/1001Pharmacies/meup-api-php-client.svg?branch=master)](https://travis-ci.org/1001Pharmacies/meup-api-php-client)
 
 Uses [1001 Pharmacies API v1.0](https://api.1001pharmacies.com/).
 
