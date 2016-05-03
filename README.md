@@ -31,11 +31,17 @@ $ php composer.phar install
 Now we can use autoloader from Composer by:
 
 ```json
-{
-    "require": {
-        "1001pharmacies/meup-api-php-client": "@dev-master"
+"repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/1001pharmacies/meup-api-php-client"
     }
+],
+...
+"require": {
+    "1001pharmacies/meup-api-php-client": "@dev-master"
 }
+
 ```
 
 > `meup-api-php-client` follows the PSR-0 convention names for its classes, which means you can easily integrate `meup-api-php-client` classes loading in your own autoloader.
@@ -52,7 +58,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey);
 
     $order  = $client
         ->api('order')
@@ -75,7 +81,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey);
     $pager  = new \Meup\Api\Client\ResultPager($client);
     $orderApiClient = $client->api(\Meup\Api\Client\Api::ORDERS);
 
@@ -128,7 +134,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey);
     $client->setCache(
         // Built in one, or any cache implementing this interface:
         // \Meup\Api\Client\HttpClient\Cache\CacheInterface

@@ -49,7 +49,7 @@ class ErrorListener
         if ($response->isClientError() || $response->isServerError()) {
             // Rate Limit
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
-            if (null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
+            if ((null !== $remaining && '' !== $remaining) && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
                 throw new ApiLimitExceedException($this->options['api_limit']);
             }
 
@@ -60,7 +60,7 @@ class ErrorListener
                 } elseif (500 == $response->getStatusCode()) {
                     throw new ErrorException($content['message'], 500);
                 } elseif (401 == $response->getStatusCode()) {
-                    throw new ErrorException($content['errors']['error_description'], 401);
+                    throw new ErrorException($content['message'], 401);
                 } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
                     $errors = array();
                     foreach ($content['errors'] as $error) {
