@@ -58,7 +58,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey);
 
     $order  = $client
         ->api('order')
@@ -81,7 +81,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\MeupApiClient($publicKey, $secretKey);
     $pager  = new \Meup\Api\Client\ResultPager($client);
     $orderApiClient = $client->api(\Meup\Api\Client\Api::ORDERS);
 
@@ -134,7 +134,7 @@ $publicKey = '{my client id}';
 $secretKey = '{my secret key}';
 
 try {
-    $client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey, $apiVersion);
+    $client = new \Meup\Api\Client\HttpClient\CachedHttpClient($publicKey, $secretKey);
     $client->setCache(
         // Built in one, or any cache implementing this interface:
         // \Meup\Api\Client\HttpClient\Cache\CacheInterface
