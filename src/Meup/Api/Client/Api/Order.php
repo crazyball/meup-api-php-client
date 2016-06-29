@@ -32,7 +32,13 @@ class Order extends AbstractApi
      */
     public function find($identifier)
     {
-        return $this->get('api/orders/'.rawurlencode($identifier));
+        return $this->get(
+            sprintf(
+                '%s/orders/%s',
+                self::BASE_API_PATH,
+                rawurlencode($identifier)
+            )
+        );
     }
 
     /**
@@ -46,7 +52,13 @@ class Order extends AbstractApi
      */
     public function all($parameters = array())
     {
-        return $this->get('api/orders' . HttpRequestParametersBuilder::buildFromArray($parameters));
+        return $this->get(
+            sprintf(
+                '%s/orders%s',
+                self::BASE_API_PATH,
+                HttpRequestParametersBuilder::buildFromArray($parameters)
+            )
+        );
     }
 
     /**
@@ -60,7 +72,12 @@ class Order extends AbstractApi
      */
     public function parcellabel($identifier)
     {
-        return $this->get("api/orders/{$identifier}/parcellabel");
+        return $this->get(
+            sprintf('%s/orders/%s/parcellabel',
+                self::BASE_API_PATH,
+                $identifier
+            )
+        );
     }
 
     /**
@@ -75,7 +92,10 @@ class Order extends AbstractApi
     public function expediate($identifier)
     {
         return $this->post(
-            "api/orders/{$identifier}/expediate",
+            sprintf('%s/orders/%s/expediate',
+                self::BASE_API_PATH,
+                $identifier
+            ),
             array(),
             array(
                 'Content-Type' => 'application/json'
