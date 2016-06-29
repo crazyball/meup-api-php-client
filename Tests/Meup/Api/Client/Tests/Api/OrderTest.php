@@ -21,6 +21,23 @@ class OrderTest extends TestCase
     /**
      * @test
      */
+    public function findAllTest()
+    {
+        $expectedArray = array('complete_invoice_number' => '1234567890');
+
+        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('api/orders')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->all('1234567890'));
+    }
+
+    /**
+     * @test
+     */
     public function findOrderTest()
     {
         $expectedArray = array('complete_invoice_number' => '1234567890');
@@ -54,6 +71,27 @@ class OrderTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->parcellabel('1234567890'));
+    }
+
+    /**
+     * @test
+     */
+    public function expediateOrderTest()
+    {
+        $baseUri = 'http://www.1001pharmacies.com';
+
+        $expectedArray = array(
+            'uri' => $baseUri . '/etiquette/1234567890?token=115ff9df6a7904df8c5493649eeae4323fb0ead0&store=26'
+        );
+
+        /** @var Order|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('api/orders/1234567890/expediate')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->expediate('1234567890'));
     }
 
     protected function getApiClass()
