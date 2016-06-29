@@ -112,6 +112,24 @@ class ProductTest extends TestCase
     /**
      * @test
      */
+    public function findByExternalReferenceTest()
+    {
+        $expectedArray = array('external' => 'ABCDEF012345');
+
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('api/product/external/ABCDEF012345')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->findByExternalReference('ABCDEF012345'));
+    }
+
+    /**
+     * @test
+     */
     public function findTest()
     {
         $expectedArray = array('reference' => '5117623');
