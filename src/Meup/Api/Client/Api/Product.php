@@ -10,6 +10,8 @@
 
 namespace Meup\Api\Client\Api;
 
+use Meup\Api\Client\Model\ProductType;
+
 /**
  * Product API
  *
@@ -19,10 +21,6 @@ namespace Meup\Api\Client\Api;
  */
 class Product extends AbstractApi
 {
-    const PRODUCT_ID_TYPE_SKU = 'sku';
-    const PRODUCT_ID_TYPE_EAN = 'ean';
-    const PRODUCT_ID_TYPE_REF = 'reference';
-
     const BULK_UPLOAD_MERGE   = 'merge';
     const BULK_UPLOAD_REPLACE = 'replace';
 
@@ -37,7 +35,7 @@ class Product extends AbstractApi
      */
     public function findBySku($sku)
     {
-        return $this->find(self::PRODUCT_ID_TYPE_SKU, $sku);
+        return $this->find(ProductType::IDENTIFIER_SKU, $sku);
     }
 
     /**
@@ -51,7 +49,21 @@ class Product extends AbstractApi
      */
     public function findByEan($ean)
     {
-        return $this->find(self::PRODUCT_ID_TYPE_EAN, $ean);
+        return $this->find(ProductType::IDENTIFIER_EAN, $ean);
+    }
+
+    /**
+     * Get Product by it's acl7
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-3
+     *
+     * @param string $acl7 product acl7
+     *
+     * @return array|null products
+     */
+    public function findByAcl7($acl7)
+    {
+        return $this->find(ProductType::IDENTIFIER_ACL7, $acl7);
     }
 
     /**
@@ -61,11 +73,41 @@ class Product extends AbstractApi
      *
      * @param string $reference product reference
      *
+     * @deprecated reference now called acl7
+     *
      * @return array|null products
      */
     public function findByReference($reference)
     {
-        return $this->find(self::PRODUCT_ID_TYPE_REF, $reference);
+        return $this->findByAcl7($reference);
+    }
+
+    /**
+     * Get Product by it's acl13
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-3
+     *
+     * @param string $acl13 product acl13
+     *
+     * @return array|null products
+     */
+    public function findByAcl13($acl13)
+    {
+        return $this->find(ProductType::IDENTIFIER_ACL13, $acl13);
+    }
+
+    /**
+     * Get Product by it's external reference
+     *
+     * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-3
+     *
+     * @param string $externalReference product external (partner) reference
+     *
+     * @return array|null products
+     */
+    public function findByExternalReference($externalReference)
+    {
+        return $this->find(ProductType::IDENTIFIER_EXTERNAL, $externalReference);
     }
 
     /**
@@ -80,15 +122,7 @@ class Product extends AbstractApi
      */
     public function find($identifierType, $identifier)
     {
-        return $this
-            ->get(
-                self::BASE_API_PATH .
-                'product/' .
-                $identifierType .
-                '/' .
-                $identifier
-            )
-        ;
+        return $this->get(sprintf('%s/product/%s/%s', self::BASE_API_PATH, $identifierType, $identifier));
     }
 
     /**
@@ -96,7 +130,7 @@ class Product extends AbstractApi
      *
      * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-5
      *
-     * @param string $identifierType   (see: self::PRODUCT_ID_TYPE_*)
+     * @param string $identifierType   (@see: Meup\Api\Client\Model\ProductType)
      * @param string $identifier       Product id
      * @param int    $quantity         Quantity to destock
      *
@@ -106,13 +140,7 @@ class Product extends AbstractApi
     {
         return $this
             ->post(
-                self::BASE_API_PATH .
-                'product/' .
-                $identifierType .
-                '/' .
-                $identifier .
-                '/' .
-                'destock',
+                sprintf('%s/product/%s/%s/destock', self::BASE_API_PATH, $identifierType, $identifier),
                 array(
                     'quantity' => $quantity
                 ),
@@ -127,7 +155,7 @@ class Product extends AbstractApi
      *
      * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-6
      *
-     * @param string $identifierType   (see: self::PRODUCT_ID_TYPE_*)
+     * @param string $identifierType   (@see: Meup\Api\Client\Model\ProductType)
      * @param string $identifier       Product id
      * @param int    $quantity         Product stock to set
      *
@@ -137,13 +165,7 @@ class Product extends AbstractApi
     {
         return $this
             ->patch(
-                self::BASE_API_PATH .
-                'product/' .
-                $identifierType .
-                '/' .
-                $identifier .
-                '/' .
-                'quantity',
+                sprintf('%s/product/%s/%s/quantity', self::BASE_API_PATH, $identifierType, $identifier),
                 array(
                     'quantity' => $quantity
                 ),
@@ -158,7 +180,7 @@ class Product extends AbstractApi
      *
      * @link http://developers.1001pharmacies.com/docs/v1/products.html#tocAnchor-1-1-7
      *
-     * @param string $identifierType   (see: self::PRODUCT_ID_TYPE_*)
+     * @param string $identifierType   (@see: Meup\Api\Client\Model\ProductType)
      * @param string $identifier       Product id
      * @param int    $warnQuantity     Warning quantity for stock alerts
      *
@@ -168,13 +190,7 @@ class Product extends AbstractApi
     {
         return $this
             ->patch(
-                self::BASE_API_PATH .
-                'product/' .
-                $identifierType .
-                '/' .
-                $identifier .
-                '/' .
-                'warnquantity',
+                sprintf('%s/product/%s/%s/warnquantity', self::BASE_API_PATH, $identifierType, $identifier),
                 array(
                     'warn_quantity' => $warnQuantity
                 ),
@@ -188,7 +204,7 @@ class Product extends AbstractApi
     /**
      * Update a specific product
      *
-     * @param string $identifierType    (see: self::PRODUCT_ID_TYPE_*)
+     * @param string $identifierType    (@see: Meup\Api\Client\Model\ProductType)
      * @param string $identifier        Product id
      * @param int    $quantity          Product stock
      * @param int    $warnQuantity      Warning quantity for stock alerts
@@ -222,8 +238,7 @@ class Product extends AbstractApi
 
         return $this
             ->put(
-                self::BASE_API_PATH .
-                'products/update',
+                sprintf('%s/products/update', self::BASE_API_PATH),
                 array($data),
                 array(
                     'Content-Type' => 'application/json'
@@ -264,8 +279,11 @@ class Product extends AbstractApi
     {
         return $this
             ->put(
-                self::BASE_API_PATH .
-                'products/update' . ($updateType == self::BULK_UPLOAD_REPLACE ? '?type=' . self::BULK_UPLOAD_REPLACE : null) ,
+                sprintf(
+                    '%s/products/update%s',
+                    self::BASE_API_PATH,
+                    ($updateType == self::BULK_UPLOAD_REPLACE ? '?type=' . self::BULK_UPLOAD_REPLACE : null)
+                ),
                 $products,
                 array(
                     'Content-Type' => 'application/json'
