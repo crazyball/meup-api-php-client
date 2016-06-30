@@ -18,7 +18,7 @@ namespace Meup\Api\Client;
 class ApiVersions
 {
     const LATEST = 'latest';
-    const V1      = '1.0';
+    const V1 = '1.0';
 
     public static function all()
     {

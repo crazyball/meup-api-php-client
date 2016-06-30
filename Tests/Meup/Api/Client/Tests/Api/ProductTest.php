@@ -10,6 +10,7 @@
 
 namespace Meup\Api\Client\Tests\Api;
 use Meup\Api\Client\Api\Product;
+use Meup\Api\Client\Model\ProductIdentifierType;
 
 /**
  * Class ProductTest
@@ -25,6 +26,7 @@ class ProductTest extends TestCase
     {
         $expectedArray = array('sku' => '2059');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -42,6 +44,7 @@ class ProductTest extends TestCase
     {
         $expectedArray = array('ean' => '3700281702385');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -55,18 +58,73 @@ class ProductTest extends TestCase
     /**
      * @test
      */
-    public function findByReferenceTest()
+    public function findByAcl7Test()
     {
-        $expectedArray = array('reference' => '5117623');
+        $expectedArray = array('acl7' => '5117623');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
             ->method('get')
-            ->with('api/product/reference/5117623')
+            ->with('api/product/acl7/5117623')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->findByAcl7('5117623'));
+    }
+
+    /**
+     * @test
+     */
+    public function findByReferenceTest()
+    {
+        $expectedArray = array('reference' => '5117623');
+
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('api/product/acl7/5117623')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->findByReference('5117623'));
+    }
+
+    /**
+     * @test
+     */
+    public function findByAcl13Test()
+    {
+        $expectedArray = array('acl13' => '3401051176231');
+
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('api/product/acl13/3401051176231')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->findByAcl13('3401051176231'));
+    }
+
+    /**
+     * @test
+     */
+    public function findByExternalReferenceTest()
+    {
+        $expectedArray = array('external' => 'ABCDEF012345');
+
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('api/product/external/ABCDEF012345')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->findByExternalReference('ABCDEF012345'));
     }
 
     /**
@@ -76,6 +134,7 @@ class ProductTest extends TestCase
     {
         $expectedArray = array('reference' => '5117623');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -83,7 +142,7 @@ class ProductTest extends TestCase
             ->with('api/product/reference/5117623')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find(Product::PRODUCT_ID_TYPE_REF, '5117623'));
+        $this->assertEquals($expectedArray, $api->find(ProductIdentifierType::IDENTIFIER_REF, '5117623'));
     }
 
     /**
@@ -94,10 +153,10 @@ class ProductTest extends TestCase
         $expectedArray = json_decode('
             [
               {
-                "cip13": "1234567890",
+                "acl13": "1234567890",
                 "ean": "1234567890",
                 "id": 1234567890,
-                "cip7": "1234567890",
+                "acl7": "1234567890",
                 "product_name": "xxxxxxxxx",
                 "brand_name": "xxxx",
                 "brand_sku": 38,
@@ -111,6 +170,7 @@ class ProductTest extends TestCase
             ]
         ');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -118,7 +178,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/destock')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->destock(Product::PRODUCT_ID_TYPE_SKU, '1234567890', 5);
+        $result = $api->destock(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -130,10 +190,10 @@ class ProductTest extends TestCase
         $expectedArray = json_decode('
             [
               {
-                "cip13": "1234567890",
+                "acl13": "1234567890",
                 "ean": "1234567890",
                 "id": 1234567890,
-                "cip7": "1234567890",
+                "acl7": "1234567890",
                 "product_name": "xxxxxxxxx",
                 "brand_name": "xxxx",
                 "brand_sku": 38,
@@ -147,6 +207,7 @@ class ProductTest extends TestCase
             ]
         ');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -154,7 +215,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/quantity')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->updateQuantity(Product::PRODUCT_ID_TYPE_SKU, '1234567890', 5);
+        $result = $api->updateQuantity(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -166,10 +227,10 @@ class ProductTest extends TestCase
         $expectedArray = json_decode('
             [
               {
-                "cip13": "1234567890",
+                "acl13": "1234567890",
                 "ean": "1234567890",
                 "id": 1234567890,
-                "cip7": "1234567890",
+                "acl7": "1234567890",
                 "product_name": "xxxxxxxxx",
                 "brand_name": "xxxx",
                 "brand_sku": 38,
@@ -183,6 +244,7 @@ class ProductTest extends TestCase
             ]
         ');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -190,7 +252,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/warnquantity')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->updateWarningQuantity(Product::PRODUCT_ID_TYPE_SKU, '1234567890', 5);
+        $result = $api->updateWarningQuantity(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -208,6 +270,7 @@ class ProductTest extends TestCase
             }
         ');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -216,7 +279,7 @@ class ProductTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $result = $api->update(
-            Product::PRODUCT_ID_TYPE_SKU,
+            ProductIdentifierType::IDENTIFIER_SKU,
             '1234567890',
             5,
             4,
@@ -234,10 +297,10 @@ class ProductTest extends TestCase
         $data = json_decode('
             [
               {
-                "cip13": "1234567890",
+                "acl13": "1234567890",
                 "ean": "1234567890",
                 "id": 1234567890,
-                "cip7": "1234567890",
+                "acl7": "1234567890",
                 "product_name": "xxxxxxxxx",
                 "brand_name": "xxxx",
                 "brand_sku": 38,
@@ -249,10 +312,10 @@ class ProductTest extends TestCase
                 "warn_quantity": 99
               },
               {
-                "cip13": "1234567890",
+                "acl13": "1234567890",
                 "ean": "1234567890",
                 "id": 1234567890,
-                "cip7": "1234567890",
+                "acl7": "1234567890",
                 "product_name": "xxxxxxxxx",
                 "brand_name": "xxxx",
                 "brand_sku": 38,
@@ -275,6 +338,7 @@ class ProductTest extends TestCase
             }
         ');
 
+        /** @var Product|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())

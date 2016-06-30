@@ -52,7 +52,7 @@ class AuthListener
 
                 $oauthQueryString  = "/oauth/v2/token?client_id=%s&client_secret=%s&grant_type=%s";
                 $requestTokenUri   =
-                    rtrim($this->api_base_uri, '/') .
+                    rtrim($this->api_base_uri, '/').
                     sprintf(
                         $oauthQueryString,
                         $this->client_id,

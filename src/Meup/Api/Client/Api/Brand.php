@@ -28,7 +28,7 @@ class Brand extends AbstractApi
      */
     public function all()
     {
-        return $this->get('api/brands');
+        return $this->get(self::BASE_API_PATH.'/brands');
     }
 
     /**
@@ -42,6 +42,6 @@ class Brand extends AbstractApi
      */
     public function getProducts($brandId)
     {
-        return $this->get(sprintf('api/brands/%s/products/', $brandId));
+        return $this->get(sprintf(self::BASE_API_PATH.'/brands/%s/products/', $brandId));
     }
 }
