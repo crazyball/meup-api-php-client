@@ -10,7 +10,7 @@
 
 namespace Meup\Api\Client\Tests\Api;
 use Meup\Api\Client\Api\Product;
-use Meup\Api\Client\Model\ProductType;
+use Meup\Api\Client\Model\ProductIdentifierType;
 
 /**
  * Class ProductTest
@@ -142,7 +142,7 @@ class ProductTest extends TestCase
             ->with('api/product/reference/5117623')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find(ProductType::IDENTIFIER_REF, '5117623'));
+        $this->assertEquals($expectedArray, $api->find(ProductIdentifierType::IDENTIFIER_REF, '5117623'));
     }
 
     /**
@@ -178,7 +178,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/destock')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->destock(ProductType::IDENTIFIER_SKU, '1234567890', 5);
+        $result = $api->destock(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -215,7 +215,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/quantity')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->updateQuantity(ProductType::IDENTIFIER_SKU, '1234567890', 5);
+        $result = $api->updateQuantity(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -252,7 +252,7 @@ class ProductTest extends TestCase
             ->with('api/product/sku/1234567890/warnquantity')
             ->will($this->returnValue($expectedArray));
 
-        $result = $api->updateWarningQuantity(ProductType::IDENTIFIER_SKU, '1234567890', 5);
+        $result = $api->updateWarningQuantity(ProductIdentifierType::IDENTIFIER_SKU, '1234567890', 5);
         $this->assertEquals($expectedArray, $result);
     }
 
@@ -279,7 +279,7 @@ class ProductTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $result = $api->update(
-            ProductType::IDENTIFIER_SKU,
+            ProductIdentifierType::IDENTIFIER_SKU,
             '1234567890',
             5,
             4,

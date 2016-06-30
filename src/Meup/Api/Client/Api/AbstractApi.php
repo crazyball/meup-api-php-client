@@ -24,7 +24,7 @@ abstract class AbstractApi implements ApiInterface
 
     /**
      * The client.
-     *gs
+     *
      * @var MeupApiClient
      */
     protected $client;

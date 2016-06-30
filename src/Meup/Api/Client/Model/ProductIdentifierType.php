@@ -15,7 +15,7 @@ namespace Meup\Api\Client\Model;
  *
  * @author Loïc AMBROSINI <loic@1001pharmacies.com>
  */
-abstract class ProductType
+abstract class ProductIdentifierType
 {
     const IDENTIFIER_SKU      = 'sku';
     const IDENTIFIER_EAN      = 'ean';

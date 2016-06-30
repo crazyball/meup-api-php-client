@@ -10,7 +10,7 @@
 
 namespace Meup\Api\Client\Api;
 
-use Meup\Api\Client\Model\ProductType;
+use Meup\Api\Client\Model\ProductIdentifierType;
 
 /**
  * Product API
@@ -35,7 +35,7 @@ class Product extends AbstractApi
      */
     public function findBySku($sku)
     {
-        return $this->find(ProductType::IDENTIFIER_SKU, $sku);
+        return $this->find(ProductIdentifierType::IDENTIFIER_SKU, $sku);
     }
 
     /**
@@ -49,7 +49,7 @@ class Product extends AbstractApi
      */
     public function findByEan($ean)
     {
-        return $this->find(ProductType::IDENTIFIER_EAN, $ean);
+        return $this->find(ProductIdentifierType::IDENTIFIER_EAN, $ean);
     }
 
     /**
@@ -63,7 +63,7 @@ class Product extends AbstractApi
      */
     public function findByAcl7($acl7)
     {
-        return $this->find(ProductType::IDENTIFIER_ACL7, $acl7);
+        return $this->find(ProductIdentifierType::IDENTIFIER_ACL7, $acl7);
     }
 
     /**
@@ -93,7 +93,7 @@ class Product extends AbstractApi
      */
     public function findByAcl13($acl13)
     {
-        return $this->find(ProductType::IDENTIFIER_ACL13, $acl13);
+        return $this->find(ProductIdentifierType::IDENTIFIER_ACL13, $acl13);
     }
 
     /**
@@ -107,7 +107,7 @@ class Product extends AbstractApi
      */
     public function findByExternalReference($externalReference)
     {
-        return $this->find(ProductType::IDENTIFIER_EXTERNAL, $externalReference);
+        return $this->find(ProductIdentifierType::IDENTIFIER_EXTERNAL, $externalReference);
     }
 
     /**
@@ -282,7 +282,7 @@ class Product extends AbstractApi
                 sprintf(
                     '%s/products/update%s',
                     self::BASE_API_PATH,
-                    ($updateType == self::BULK_UPLOAD_REPLACE ? '?type='.self::BULK_UPLOAD_REPLACE : null)
+                    ($updateType == self::BULK_UPLOAD_REPLACE ? '?type='.self::BULK_UPLOAD_REPLACE : '')
                 ),
                 $products,
                 array(
