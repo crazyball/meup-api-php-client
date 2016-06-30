@@ -20,11 +20,11 @@ use Meup\Api\Client\MeupApiClient;
  */
 abstract class AbstractApi implements ApiInterface
 {
-    const BASE_API_PATH = "api";
+    const BASE_API_PATH = 'api';
 
     /**
      * The client.
-     *
+     *gs
      * @var MeupApiClient
      */
     protected $client;

@@ -250,7 +250,7 @@ class HttpClient implements HttpClientInterface
     ) {
         return $this->client->createRequest(
             $httpMethod,
-            rtrim($this->options['base_url'], '/') . '/' . ltrim($path, '/'),
+            rtrim($this->options['base_url'], '/').'/'.ltrim($path, '/'),
             array_merge($this->headers, $headers),
             $body,
             $options

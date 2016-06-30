@@ -18,7 +18,7 @@ class HttpRequestParametersBuilder
         if ($parameters && is_array($parameters)) {
             $queryString .= "?";
             foreach ($parameters as $param => $value) {
-                $queryString .= $param . "=" . $value . "&";
+                $queryString .= $param."=".$value."&";
             }
             $queryString = rtrim($queryString, "&");
         }

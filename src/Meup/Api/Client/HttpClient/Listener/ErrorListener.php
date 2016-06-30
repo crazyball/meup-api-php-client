@@ -49,7 +49,10 @@ class ErrorListener
         if ($response->isClientError() || $response->isServerError()) {
             // Rate Limit
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
-            if ((null !== $remaining && '' !== $remaining) && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
+            if (
+                (null !== $remaining && '' !== $remaining) &&
+                1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)
+            ) {
                 throw new ApiLimitExceedException($this->options['api_limit']);
             }
 
@@ -112,7 +115,7 @@ class ErrorListener
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed: ' . implode(', ', $errors), 422);
+                    throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
                 }
             }
 

@@ -204,12 +204,12 @@ class Product extends AbstractApi
     /**
      * Update a specific product
      *
-     * @param string $identifierType    (@see: Meup\Api\Client\Model\ProductType)
-     * @param string $identifier        Product id
-     * @param int    $quantity          Product stock
-     * @param int    $warnQuantity      Warning quantity for stock alerts
-     * @param string $price             Product price
-     * @param float  $active            Is product active on 1001Pharmacies ?
+     * @param string  $identifierType    (@see: Meup\Api\Client\Model\ProductType)
+     * @param string  $identifier        Product id
+     * @param int     $quantity          Product stock
+     * @param int     $warnQuantity      Warning quantity for stock alerts
+     * @param string  $price             Product price
+     * @param boolean $active            Is product active on 1001Pharmacies ?
      *
      * @return array|null               Product update result
      */
@@ -282,7 +282,7 @@ class Product extends AbstractApi
                 sprintf(
                     '%s/products/update%s',
                     self::BASE_API_PATH,
-                    ($updateType == self::BULK_UPLOAD_REPLACE ? '?type=' . self::BULK_UPLOAD_REPLACE : null)
+                    ($updateType == self::BULK_UPLOAD_REPLACE ? '?type='.self::BULK_UPLOAD_REPLACE : null)
                 ),
                 $products,
                 array(
