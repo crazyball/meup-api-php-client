@@ -35,7 +35,7 @@ class HttpClient implements HttpClientInterface
     protected $access_token;
 
     protected $options = array(
-        'base_url'    => 'https://api.1001pharmacies.com',
+        'base_url'    => 'http://api.1001pharmacies.com',
 
         'user_agent'  => 'php-meup-api (http://github.com/1001pharmacies/meup-api-php-client)',
         'timeout'     => 10,
