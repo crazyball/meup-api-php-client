@@ -2,6 +2,7 @@
 
 A simple Object Oriented wrapper for 1001 pharmacies Restfull API, written with PHP5.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/030d3647458b40e9ade5e1483b648d9e)](https://www.codacy.com/app/crazyball/meup-api-php-client?utm_source=github.com&utm_medium=referral&utm_content=1001Pharmacies/meup-api-php-client&utm_campaign=badger)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b/mini.png)](https://insight.sensiolabs.com/projects/07f2ad65-9e54-4b56-9d6b-e4ad2ebb439b)
 [![Build Status](https://travis-ci.org/1001Pharmacies/meup-api-php-client.svg?branch=master)](https://travis-ci.org/1001Pharmacies/meup-api-php-client)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/1001Pharmacies/meup-api-php-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/1001Pharmacies/meup-api-php-client/?branch=master)
